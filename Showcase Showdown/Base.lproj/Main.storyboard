@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GbU-z1-2FX">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="qdW-Gq-lQs">
+            <objects>
+                <viewController id="GbU-z1-2FX" customClass="RPTViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YUJ-dJ-wu8"/>
+                        <viewControllerLayoutGuide type="bottom" id="14O-xo-SFr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="r4p-0i-3QZ">
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="backGround" translatesAutoresizingMaskIntoConstraints="NO" id="FNI-ze-ojb">
+                                <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dqt-5T-nlx">
+                                <rect key="frame" x="309" y="59" width="116" height="308"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2OV-Hg-4Tl">
+                                <rect key="frame" x="310" y="0.0" width="116" height="429"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="GbU-z1-2FX" id="NQK-Tc-EZn"/>
+                                    <outlet property="delegate" destination="GbU-z1-2FX" id="upj-XU-zTS"/>
+                                </connections>
+                            </pickerView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="picker" translatesAutoresizingMaskIntoConstraints="NO" id="QxH-tn-hF5">
+                                <rect key="frame" x="408" y="185" width="58" height="60"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td2-9B-LNg">
+                                <rect key="frame" x="20" y="266" width="18" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bk-yP-R7t">
+                                <rect key="frame" x="20" y="285" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjr-Ik-N92">
+                                <rect key="frame" x="20" y="144" width="21" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LII-FT-LA0">
+                                <rect key="frame" x="20" y="167" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJY-y7-FP8">
+                                <rect key="frame" x="20" y="198" width="21" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0oy-jM-68x">
+                                <rect key="frame" x="20" y="222" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6C3-No-UcY">
+                                <rect key="frame" x="636" y="314" width="80" height="80"/>
+                                <state key="normal" title="STAY" image="stayButton"/>
+                                <connections>
+                                    <action selector="stayButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="pvm-Yk-Hyb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWV-Iv-dpz">
+                                <rect key="frame" x="636" y="226" width="80" height="80"/>
+                                <state key="normal" title="SPIN AGAIN" image="spinAgainButton"/>
+                                <connections>
+                                    <action selector="spinAgainButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="Ibk-Zj-gLX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMy-Xn-ufh">
+                                <rect key="frame" x="20" y="20" width="90" height="31"/>
+                                <state key="normal" title="RESET" image="resetButton"/>
+                                <connections>
+                                    <action selector="resetButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="Hb1-Am-O61"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVr-JM-d4V">
+                                <rect key="frame" x="636" y="314" width="80" height="80"/>
+                                <state key="normal" title="PLAY AGAIN" image="playAgainButton"/>
+                                <connections>
+                                    <action selector="playAgainButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="2ZH-eC-Bg4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIu-dB-pOo">
+                                <rect key="frame" x="636" y="314" width="80" height="80"/>
+                                <state key="normal" title="Button" image="okayButton"/>
+                                <connections>
+                                    <action selector="dismissOKSpinHarderButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="VnB-CP-aR0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fS5-dl-t7D">
+                                <rect key="frame" x="636" y="314" width="80" height="80"/>
+                                <state key="normal" title="DONE" image="doneButton"/>
+                                <connections>
+                                    <action selector="doneButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="Rbu-cb-bfv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJy-sC-8Bk">
+                                <rect key="frame" x="636" y="314" width="80" height="80"/>
+                                <state key="normal" title="OK" image="okayButton"/>
+                                <connections>
+                                    <action selector="okayButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="6Vc-la-dvE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pa5-7n-K3l">
+                                <rect key="frame" x="636" y="314" width="80" height="80"/>
+                                <state key="normal" title="dismiss NC" image="okayButton"/>
+                                <connections>
+                                    <action selector="dismissNextContestantImageButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="owz-Ug-SrW"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-hk-viD">
+                                <rect key="frame" x="119" y="198" width="497" height="196"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gr7-7n-YmA">
+                                <rect key="frame" x="584" y="109" width="118" height="63"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6aS-yf-Jtt">
+                                <rect key="frame" x="246" y="90" width="240" height="240"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45K-8b-OlA">
+                                <rect key="frame" x="636" y="314" width="80" height="80"/>
+                                <state key="normal" title="OKTIE" image="okayButton"/>
+                                <connections>
+                                    <action selector="dismissTieButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="dXN-hQ-R67"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="digitalSignImage" destination="gr7-7n-YmA" id="QxR-jT-p5I"/>
+                        <outlet property="dismissNextContestantImageButtonOutlet" destination="pa5-7n-K3l" id="S1R-0r-8tL"/>
+                        <outlet property="dismissOKSpinHarderButtonOutlet" destination="NIu-dB-pOo" id="x6k-m0-fwO"/>
+                        <outlet property="dismissTieButtonOutlet" destination="45K-8b-OlA" id="M3k-Ko-ztI"/>
+                        <outlet property="doneButtonOutlet" destination="fS5-dl-t7D" id="Jwg-3W-6tJ"/>
+                        <outlet property="middleGraphic" destination="1Sf-hk-viD" id="yO9-9w-zuT"/>
+                        <outlet property="nextContestantImageView" destination="6aS-yf-Jtt" id="bbp-rE-T7m"/>
+                        <outlet property="okButtonOutlet" destination="bJy-sC-8Bk" id="Af1-wT-sZn"/>
+                        <outlet property="p1Score" destination="7bk-yP-R7t" id="3L1-W6-eiq"/>
+                        <outlet property="p2Score" destination="LII-FT-LA0" id="8ok-BL-dtB"/>
+                        <outlet property="p3Score" destination="0oy-jM-68x" id="fXR-ci-1mP"/>
+                        <outlet property="pirWheelPicker" destination="2OV-Hg-4Tl" id="yNT-ST-ypU"/>
+                        <outlet property="playAgainButtonOutlet" destination="FVr-JM-d4V" id="eE5-HR-vrz"/>
+                        <outlet property="resetButtonOutlet" destination="nMy-Xn-ufh" id="LzN-bR-C6j"/>
+                        <outlet property="spinAgainButtonOutlet" destination="oWV-Iv-dpz" id="0kL-S9-W61"/>
+                        <outlet property="stayButtonOutlet" destination="6C3-No-UcY" id="1Kn-Iy-eYg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GHZ-fY-91B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="313" y="362"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="backGround" width="2220" height="1245"/>
+        <image name="doneButton" width="1410" height="1528"/>
+        <image name="okayButton" width="625" height="677"/>
+        <image name="picker" width="153" height="128"/>
+        <image name="playAgainButton" width="1410" height="1528"/>
+        <image name="resetButton" width="495" height="187"/>
+        <image name="spinAgainButton" width="625" height="677"/>
+        <image name="stayButton" width="625" height="677"/>
+    </resources>
+</document>
