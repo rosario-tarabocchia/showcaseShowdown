@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GbU-z1-2FX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D6h-n7-P2s">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -173,10 +173,47 @@
             </objects>
             <point key="canvasLocation" x="313" y="362"/>
         </scene>
+        <!--Host Screen View Controller-->
+        <scene sceneID="c1v-bb-gty">
+            <objects>
+                <viewController id="D6h-n7-P2s" customClass="RPTHostScreenViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dHu-4m-dj8"/>
+                        <viewControllerLayoutGuide type="bottom" id="lCZ-B6-rNF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IwB-YL-Ikc">
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hostScreen" translatesAutoresizingMaskIntoConstraints="NO" id="MaP-lg-AYd">
+                                <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PH5-u0-7Ir">
+                                <rect key="frame" x="514" y="177" width="109" height="217"/>
+                                <state key="normal" image="drewImage"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fZ-Vj-WQT">
+                                <rect key="frame" x="112" y="164" width="97" height="230"/>
+                                <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
+                                <state key="normal" image="bobImage"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WPC-bQ-cAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="331" y="869"/>
+        </scene>
     </scenes>
     <resources>
         <image name="backGround" width="2220" height="1245"/>
+        <image name="bobImage" width="303" height="705"/>
         <image name="doneButton" width="1410" height="1528"/>
+        <image name="drewImage" width="327" height="644"/>
+        <image name="hostScreen" width="2216" height="1242"/>
         <image name="okayButton" width="625" height="677"/>
         <image name="picker" width="153" height="128"/>
         <image name="playAgainButton" width="1410" height="1528"/>

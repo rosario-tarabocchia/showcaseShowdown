@@ -19,8 +19,8 @@
         _firstSpinScore = 0;
         _totalSpinScore = 0;
         _numberOfSpins = 0;
-        _centsSign = [[RPTDigitalSign alloc] init];
-        _centsSign.image = [RPTDigitalSign imageNamed:@"spin"];
+        _centsSign = [[UIImage alloc] init];
+        _centsSign = [UIImage imageNamed:@"spin"];
 
     }
     
@@ -53,19 +53,7 @@
     
     NSString *sign = [NSString stringWithFormat:@"%li", firstNumber];
     
-    if (firstNumber == 100) {
-        
-        sign = [NSString stringWithFormat:@"%liwhite", firstNumber];
-        
-        self.centsSign.image = [RPTDigitalSign imageNamed:sign];
-        
-    } else {
-        
-        self.centsSign.image = [RPTDigitalSign imageNamed:sign];
-        
-    }
-    
-    self.firstSpinScore = firstNumber;
+    self.centsSign = [UIImage imageNamed:sign];
     
     self.totalSpinScore = firstNumber;
 
@@ -80,23 +68,15 @@
         
         sign = @"over";
         
-        self.centsSign.image = [RPTDigitalSign imageNamed:sign];
+        self.centsSign = [UIImage imageNamed:sign];
         
         secondNumber = 0;
         
     }
     
-    else if (secondNumber == 100){
-        
-        sign = [NSString stringWithFormat:@"%lired", secondNumber];
-        
-        self.centsSign.image = [RPTDigitalSign imageNamed:sign];
-        
-    }
-    
     else {
         
-        self.centsSign.image = [RPTDigitalSign imageNamed:sign];
+        self.centsSign = [UIImage imageNamed:sign];
         
     }
     

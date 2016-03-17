@@ -25,7 +25,7 @@
         _player3.contestantNumber = 3;
         _playerArray = [@[self.player1, self.player2, self.player3] mutableCopy];
         _playerCount = 0;
-        _winnerGraphic = [[RPTMiddleGraphic alloc] init];
+        _winnerGraphic = [[UIImage alloc] init];
         _highScore = 0;
     
     }
@@ -88,20 +88,20 @@
         
         if (self.player1.totalSpinScore > self.player2.totalSpinScore && self.player1.totalSpinScore > self.player3.totalSpinScore) {
             
-            self.winnerGraphic.image = [RPTMiddleGraphic imageNamed:@"winner1Image"];
+            self.winnerGraphic = [UIImage imageNamed:@"winner1Image"];
             
         }
         
         if (self.player2.totalSpinScore > self.player1.totalSpinScore && self.player2.totalSpinScore > self.player3.totalSpinScore) {
             
-            self.winnerGraphic.image = [RPTMiddleGraphic imageNamed:@"winner2Image"];
+            self.winnerGraphic = [UIImage imageNamed:@"winner2Image"];
             
         }
         
         
         if (self.player3.totalSpinScore > self.player1.totalSpinScore && self.player3.totalSpinScore > self.player2.totalSpinScore) {
             
-            self.winnerGraphic.image = [RPTMiddleGraphic imageNamed:@"winner3Image"];
+            self.winnerGraphic = [UIImage imageNamed:@"winner3Image"];
             
         }
 
@@ -122,12 +122,12 @@
     self.player1.numberOfSpins = 1;
     self.player2.numberOfSpins = 1;
     self.player3.numberOfSpins = 1;
-    self.player1.centsSign.image = [RPTDigitalSign imageNamed:@"spin"];
-    self.player2.centsSign.image = [RPTDigitalSign imageNamed:@"spin"];
-    self.player3.centsSign.image = [RPTDigitalSign imageNamed:@"spin"];
+    self.player1.centsSign = [UIImage imageNamed:@"spin"];
+    self.player2.centsSign = [UIImage imageNamed:@"spin"];
+    self.player3.centsSign = [UIImage imageNamed:@"spin"];
     self.tieGame = YES;
     self.playerCount = 0;
-    self.winnerGraphic.image = [RPTMiddleGraphic imageNamed:@"tiedImage"];
+    self.winnerGraphic = [UIImage imageNamed:@"tiedImage"];
 
 }
 
@@ -145,6 +145,7 @@
     
     
 }
+
 
 -(NSString *)nextContestantImageString:(NSInteger)contestantNumber{
     

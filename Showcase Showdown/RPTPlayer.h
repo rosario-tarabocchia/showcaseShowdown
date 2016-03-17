@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RPTDigitalSign.h"
+#import <UIKit/UIKit.h>
 
 
 @interface RPTPlayer : NSObject
@@ -17,7 +17,7 @@
 @property (nonatomic, assign) NSInteger totalSpinScore;
 @property (nonatomic, assign) NSInteger numberOfSpins;
 @property (nonatomic, assign) NSInteger contestantNumber;
-@property (nonatomic) RPTDigitalSign *centsSign;
+@property (nonatomic) UIImage *centsSign;
 
 -(void)numberCheck:(NSInteger)wheelNumber;
 -(void)actionsAfterTheFirstSpin:(NSInteger)firstNumber;

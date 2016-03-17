@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		732821011C9840D9009AD77B /* RPTDigitalSign.m in Sources */ = {isa = PBXBuildFile; fileRef = 732821001C9840D9009AD77B /* RPTDigitalSign.m */; };
-		732821041C98841C009AD77B /* RPTMiddleGraphic.m in Sources */ = {isa = PBXBuildFile; fileRef = 732821031C98841C009AD77B /* RPTMiddleGraphic.m */; };
+		7342DA0B1C9A3218003E1B4E /* RPTHostScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7342DA0A1C9A3218003E1B4E /* RPTHostScreenViewController.m */; };
 		73AABDCD1C97030D0091B443 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AABDCC1C97030D0091B443 /* main.m */; };
 		73AABDD01C97030D0091B443 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 73AABDCF1C97030D0091B443 /* AppDelegate.m */; };
 		73AABDD61C97030D0091B443 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73AABDD41C97030D0091B443 /* Main.storyboard */; };
@@ -21,10 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		732820FF1C9840D9009AD77B /* RPTDigitalSign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTDigitalSign.h; sourceTree = "<group>"; };
-		732821001C9840D9009AD77B /* RPTDigitalSign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTDigitalSign.m; sourceTree = "<group>"; };
-		732821021C98841C009AD77B /* RPTMiddleGraphic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTMiddleGraphic.h; sourceTree = "<group>"; };
-		732821031C98841C009AD77B /* RPTMiddleGraphic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTMiddleGraphic.m; sourceTree = "<group>"; };
+		7342DA091C9A3218003E1B4E /* RPTHostScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTHostScreenViewController.h; sourceTree = "<group>"; };
+		7342DA0A1C9A3218003E1B4E /* RPTHostScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTHostScreenViewController.m; sourceTree = "<group>"; };
 		73AABDC81C97030D0091B443 /* Showcase Showdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Showcase Showdown.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73AABDCC1C97030D0091B443 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		73AABDCE1C97030D0091B443 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,8 +55,6 @@
 			children = (
 				73AABDE81C97037D0091B443 /* RPTPlayer.h */,
 				73AABDE91C97037D0091B443 /* RPTPlayer.m */,
-				732820FF1C9840D9009AD77B /* RPTDigitalSign.h */,
-				732821001C9840D9009AD77B /* RPTDigitalSign.m */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -69,8 +64,6 @@
 			children = (
 				73AABDEE1C97128B0091B443 /* RPTGame.h */,
 				73AABDEF1C97128B0091B443 /* RPTGame.m */,
-				732821021C98841C009AD77B /* RPTMiddleGraphic.h */,
-				732821031C98841C009AD77B /* RPTMiddleGraphic.m */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -100,6 +93,8 @@
 				7342DA071C98A3D6003E1B4E /* Player */,
 				73AABDF71C974C9E0091B443 /* RPTViewController.h */,
 				73AABDF81C974C9E0091B443 /* RPTViewController.m */,
+				7342DA091C9A3218003E1B4E /* RPTHostScreenViewController.h */,
+				7342DA0A1C9A3218003E1B4E /* RPTHostScreenViewController.m */,
 				73AABDD41C97030D0091B443 /* Main.storyboard */,
 				73AABDDA1C97030D0091B443 /* Assets.xcassets */,
 				73AABDDC1C97030D0091B443 /* LaunchScreen.storyboard */,
@@ -188,10 +183,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				732821041C98841C009AD77B /* RPTMiddleGraphic.m in Sources */,
+				7342DA0B1C9A3218003E1B4E /* RPTHostScreenViewController.m in Sources */,
 				73AABDD01C97030D0091B443 /* AppDelegate.m in Sources */,
 				73AABDF01C97128B0091B443 /* RPTGame.m in Sources */,
-				732821011C9840D9009AD77B /* RPTDigitalSign.m in Sources */,
 				73AABDCD1C97030D0091B443 /* main.m in Sources */,
 				73AABDF91C974C9E0091B443 /* RPTViewController.m in Sources */,
 				73AABDD91C97030D0091B443 /* Showcase_Showdown.xcdatamodeld in Sources */,

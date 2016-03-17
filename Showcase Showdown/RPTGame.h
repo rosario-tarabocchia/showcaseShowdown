@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RPTPlayer.h"
-#import "RPTMiddleGraphic.h"
+
 
 
 @interface RPTGame : NSObject
@@ -16,7 +16,7 @@
 @property (nonatomic, strong) RPTPlayer *player1;
 @property (nonatomic, strong) RPTPlayer *player2;
 @property (nonatomic, strong) RPTPlayer *player3;
-@property (nonatomic, strong) RPTMiddleGraphic *winnerGraphic;
+@property (nonatomic, strong) UIImage *winnerGraphic;
 @property (nonatomic) BOOL tieGame;
 @property (nonatomic, assign) NSInteger playerCount;
 @property (nonatomic, strong) NSMutableArray *playerArray;

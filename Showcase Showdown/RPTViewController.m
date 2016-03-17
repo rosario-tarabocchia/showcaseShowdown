@@ -337,7 +337,7 @@
 
 -(void)updateDigitalSign {
     
-    [self.digitalSignImage setImage:self.player.centsSign.image];
+    [self.digitalSignImage setImage:self.player.centsSign];
     
     
 }
@@ -474,7 +474,6 @@
 - (IBAction)resetButtonAction:(id)sender {
     
     [self startNewGame];
-
     
 }
 
@@ -483,7 +482,6 @@
     
     [self startNewGame];
 
-    
 }
 
 
@@ -544,8 +542,8 @@
         
         if (self.game.tieGame) {
             
-            [self.dismissTieButtonOutlet setHidden:NO];
             UIImage *tieGame = [UIImage imageNamed:@"tieGame"];
+            [self.dismissTieButtonOutlet setHidden:NO];
             [self.middleGraphic setImage:tieGame];
             [self.middleGraphic setHidden:NO];
         
@@ -555,7 +553,7 @@
             
             [self.game determiningTheWinner];
             [self.playAgainButtonOutlet setHidden:NO];
-            [self.middleGraphic setImage:self.game.winnerGraphic.image];
+            [self.middleGraphic setImage:self.game.winnerGraphic];
             [self.middleGraphic setHidden:NO];
             
         }
@@ -572,6 +570,7 @@
     
 }
 
+
 - (IBAction)dismissNextContestantImageButtonAction:(id)sender {
     
     [self.nextContestantImageView setHidden:YES];
@@ -579,6 +578,7 @@
     [self.pirWheelPicker setUserInteractionEnabled:YES];
     
 }
+
 
 -(void)getContestantImage {
     
@@ -591,6 +591,7 @@
     
 }
 
+
 - (IBAction)dismissTieButtonAction:(id)sender {
     
     [self startTieGame];
@@ -598,6 +599,7 @@
     [self.dismissTieButtonOutlet setHidden:YES];
     self.game.tieGame = NO;
     [self updateDigitalSign];
+    
 }
 
 @end
