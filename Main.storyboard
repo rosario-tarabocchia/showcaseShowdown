@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="qdW-Gq-lQs">
             <objects>
-                <viewController id="GbU-z1-2FX" customClass="RPTViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainGame" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GbU-z1-2FX" customClass="RPTViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YUJ-dJ-wu8"/>
                         <viewControllerLayoutGuide type="bottom" id="14O-xo-SFr"/>
@@ -34,7 +34,7 @@
                                     <outlet property="delegate" destination="GbU-z1-2FX" id="upj-XU-zTS"/>
                                 </connections>
                             </pickerView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="picker" translatesAutoresizingMaskIntoConstraints="NO" id="QxH-tn-hF5">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QxH-tn-hF5">
                                 <rect key="frame" x="408" y="185" width="58" height="60"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td2-9B-LNg">
@@ -129,14 +129,18 @@
                                     <action selector="dismissNextContestantImageButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="owz-Ug-SrW"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-hk-viD">
-                                <rect key="frame" x="119" y="198" width="497" height="196"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bobImage" translatesAutoresizingMaskIntoConstraints="NO" id="3ca-T8-wlH">
+                                <rect key="frame" x="76" y="90" width="202" height="304"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="BUt-p3-AsU" appends="YES" id="Qmr-ug-jhg"/>
+                                </connections>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gr7-7n-YmA">
                                 <rect key="frame" x="584" y="109" width="118" height="63"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6aS-yf-Jtt">
-                                <rect key="frame" x="246" y="90" width="240" height="240"/>
+                                <rect key="frame" x="258" y="116" width="218" height="218"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45K-8b-OlA">
                                 <rect key="frame" x="636" y="314" width="80" height="80"/>
@@ -145,17 +149,49 @@
                                     <action selector="dismissTieButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="dXN-hQ-R67"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2qc-tM-rMZ">
+                                <rect key="frame" x="237" y="53" width="256" height="120"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-hk-viD">
+                                <rect key="frame" x="163" y="232" width="410" height="162"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sdq-Qz-Oon">
+                                <rect key="frame" x="24" y="354" width="34" height="40"/>
+                                <state key="normal" title="Button" image="bobHead"/>
+                                <connections>
+                                    <action selector="bobHeadAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="dRS-pR-jG8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YD4-h2-vDj">
+                                <rect key="frame" x="21" y="354" width="40" height="40"/>
+                                <state key="normal" title="Button" image="drewHead"/>
+                                <connections>
+                                    <action selector="drewHeadAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="TL9-bS-7Xw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dx0-fB-rOV">
+                                <rect key="frame" x="636" y="313" width="80" height="80"/>
+                                <state key="normal" title="Button" image="okayButton"/>
+                                <connections>
+                                    <action selector="introDismissButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="q6x-6b-pJV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="bobHeadOutlet" destination="Sdq-Qz-Oon" id="se5-VX-CM4"/>
                         <outlet property="digitalSignImage" destination="gr7-7n-YmA" id="QxR-jT-p5I"/>
                         <outlet property="dismissNextContestantImageButtonOutlet" destination="pa5-7n-K3l" id="S1R-0r-8tL"/>
                         <outlet property="dismissOKSpinHarderButtonOutlet" destination="NIu-dB-pOo" id="x6k-m0-fwO"/>
                         <outlet property="dismissTieButtonOutlet" destination="45K-8b-OlA" id="M3k-Ko-ztI"/>
                         <outlet property="doneButtonOutlet" destination="fS5-dl-t7D" id="Jwg-3W-6tJ"/>
+                        <outlet property="drewHeadOutlet" destination="YD4-h2-vDj" id="tSW-Ou-2KC"/>
+                        <outlet property="hostDialogImageView" destination="2qc-tM-rMZ" id="mdT-ur-JaK"/>
+                        <outlet property="hostImageView" destination="3ca-T8-wlH" id="stX-AZ-F0T"/>
+                        <outlet property="introDismissButtonOutlet" destination="Dx0-fB-rOV" id="yuU-b7-mdN"/>
                         <outlet property="middleGraphic" destination="1Sf-hk-viD" id="yO9-9w-zuT"/>
                         <outlet property="nextContestantImageView" destination="6aS-yf-Jtt" id="bbp-rE-T7m"/>
                         <outlet property="okButtonOutlet" destination="bJy-sC-8Bk" id="Af1-wT-sZn"/>
@@ -170,13 +206,18 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHZ-fY-91B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="BUt-p3-AsU">
+                    <connections>
+                        <action selector="priceIsWrongGesture:" destination="GbU-z1-2FX" id="Oaf-Uz-6Z8"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="313" y="362"/>
         </scene>
         <!--Host Screen View Controller-->
         <scene sceneID="c1v-bb-gty">
             <objects>
-                <viewController id="D6h-n7-P2s" customClass="RPTHostScreenViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="hostScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D6h-n7-P2s" customClass="RPTHostScreenViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dHu-4m-dj8"/>
                         <viewControllerLayoutGuide type="bottom" id="lCZ-B6-rNF"/>
@@ -185,23 +226,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hostScreen" translatesAutoresizingMaskIntoConstraints="NO" id="MaP-lg-AYd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="doorsClosed" translatesAutoresizingMaskIntoConstraints="NO" id="MaP-lg-AYd">
                                 <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PH5-u0-7Ir">
-                                <rect key="frame" x="514" y="177" width="109" height="217"/>
+                                <rect key="frame" x="514" y="155" width="119" height="236"/>
                                 <state key="normal" image="drewImage"/>
+                                <connections>
+                                    <action selector="drewButtonAction:" destination="D6h-n7-P2s" eventType="touchUpInside" id="is5-AS-1qh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fZ-Vj-WQT">
-                                <rect key="frame" x="112" y="164" width="97" height="230"/>
+                                <rect key="frame" x="115" y="149" width="103" height="245"/>
                                 <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
                                 <state key="normal" image="bobImage"/>
+                                <connections>
+                                    <action selector="bobButtonAction:" destination="D6h-n7-P2s" eventType="touchUpInside" id="9b7-S0-yW7"/>
+                                </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hostIntroScreen2" translatesAutoresizingMaskIntoConstraints="NO" id="2Sg-Ys-SJ5">
+                                <rect key="frame" x="221" y="125" width="290" height="104"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hostIntro5" translatesAutoresizingMaskIntoConstraints="NO" id="ONm-MV-xzd">
+                                <rect key="frame" x="246" y="286" width="240" height="86"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="bobButton" destination="2fZ-Vj-WQT" id="6e5-0D-o9t"/>
+                        <outlet property="bobDialogImage" destination="2Sg-Ys-SJ5" id="4xn-tB-iXJ"/>
+                        <outlet property="doorsClosed" destination="MaP-lg-AYd" id="LDg-cC-b14"/>
+                        <outlet property="drewButton" destination="PH5-u0-7Ir" id="4hd-vU-jpO"/>
+                        <outlet property="drewButtonOutlet" destination="PH5-u0-7Ir" id="JOK-Rn-tAe"/>
+                        <outlet property="drewDialogImage" destination="ONm-MV-xzd" id="Tnl-3g-sEa"/>
+                        <segue destination="GbU-z1-2FX" kind="show" identifier="gameVC" id="F3j-k9-Vr3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPC-bQ-cAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -210,12 +272,15 @@
     </scenes>
     <resources>
         <image name="backGround" width="2220" height="1245"/>
+        <image name="bobHead" width="213" height="257"/>
         <image name="bobImage" width="303" height="705"/>
         <image name="doneButton" width="1410" height="1528"/>
-        <image name="drewImage" width="327" height="644"/>
-        <image name="hostScreen" width="2216" height="1242"/>
+        <image name="doorsClosed" width="2185" height="1225"/>
+        <image name="drewHead" width="222" height="211"/>
+        <image name="drewImage" width="324" height="644"/>
+        <image name="hostIntro5" width="1546" height="419"/>
+        <image name="hostIntroScreen2" width="2051" height="799"/>
         <image name="okayButton" width="625" height="677"/>
-        <image name="picker" width="153" height="128"/>
         <image name="playAgainButton" width="1410" height="1528"/>
         <image name="resetButton" width="495" height="187"/>
         <image name="spinAgainButton" width="625" height="677"/>

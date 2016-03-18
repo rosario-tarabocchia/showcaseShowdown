@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RPTViewController.h"
+#import "RPTHost.h"
 
 @interface RPTHostScreenViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIButton *drewButtonOutlet;
 
 @end

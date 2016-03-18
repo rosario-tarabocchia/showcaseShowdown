@@ -17,7 +17,7 @@
 @property (nonatomic, strong) RPTPlayer *player2;
 @property (nonatomic, strong) RPTPlayer *player3;
 @property (nonatomic, strong) UIImage *winnerGraphic;
-@property (nonatomic) BOOL tieGame;
+@property (nonatomic, assign) BOOL tieGame;
 @property (nonatomic, assign) NSInteger playerCount;
 @property (nonatomic, strong) NSMutableArray *playerArray;
 @property (nonatomic, assign) NSInteger highScore;

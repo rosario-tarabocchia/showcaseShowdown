@@ -68,7 +68,7 @@
 
     }
     
-    else if (self.player2.totalSpinScore == self.player3.totalSpinScore && self.player2 > self.player1) {
+    else if (self.player2.totalSpinScore == self.player3.totalSpinScore && self.player2.totalSpinScore > self.player1.totalSpinScore) {
         
         self.playerArray = [@[self.player2, self.player3] mutableCopy];
         

@@ -8,12 +8,15 @@
 
 #import "RPTViewController.h"
 #import "RPTGame.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface RPTViewController ()
 
 //Game Properties
 @property (nonatomic) RPTPlayer *player;
 @property (nonatomic) RPTGame *game;
+
 @property (weak, nonatomic) IBOutlet UILabel *p1Score;
 @property (weak, nonatomic) IBOutlet UILabel *p2Score;
 @property (weak, nonatomic) IBOutlet UILabel *p3Score;
@@ -31,11 +34,15 @@
 @property (nonatomic) BOOL spinDownward;
 @property (nonatomic) BOOL spinUpwards;
 
+
 //Images Properties
 @property (weak, nonatomic) IBOutlet UIImageView *digitalSignImage;
 @property (weak, nonatomic) IBOutlet UIImageView *middleGraphic;
 @property (weak, nonatomic) IBOutlet UIImageView *nextContestantImageView;
 @property (nonatomic) UIImage *nextContestantImage;
+@property (strong, nonatomic) IBOutlet UIImageView *hostDialogImageView;
+@property (nonatomic ,strong) UIImage *hostDialog;
+//@property (strong, nonatomic) IBOutlet UIImageView *hostImageView;
 
 //Buttons Properties
 @property (weak, nonatomic) IBOutlet UIButton *stayButtonOutlet;
@@ -47,6 +54,19 @@
 @property (weak, nonatomic) IBOutlet UIButton *dismissOKSpinHarderButtonOutlet;
 @property (weak, nonatomic) IBOutlet UIButton *dismissNextContestantImageButtonOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *dismissTieButtonOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *drewHeadOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *bobHeadOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *introDismissButtonOutlet;
+
+//Audio
+@property (nonatomic) AVAudioPlayer *audioPlayer;
+@property (nonatomic) AVAudioPlayer *audioPlayerWinner;
+@property (nonatomic) NSURL *priceIsWrong;
+@property (nonatomic) NSURL *dollarWinner;
+@property (nonatomic) NSURL *loserURL;
+@property (nonatomic) NSURL *winnerURL;
+
+
 
 @end
 
@@ -54,18 +74,56 @@
 
 - (void)viewDidLoad {
     
+    NSLog(@"%@", self.host.name);
+    
     [super viewDidLoad];
+    
     [self loadSettings];
-    [self startNewGame];
+    [self loadAudio];
+    [self checkHostButton];
+    UIImage *centsSign = [UIImage imageNamed:@"spin"];
+    [self.digitalSignImage setImage:centsSign];
+//    [self startNewGame];
+    
+    
+    NSLog(@"GETTING HERE");
+    
+    
+    
+    
+    
+    
+
+    
+    
     
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+
+    [self hostDialogIntro];
+}
+
+-(void)loadAudio {
+    
+        self.priceIsWrong = [[NSBundle mainBundle] URLForResource:@"happy10" withExtension:@"wav"];
+        self.dollarWinner = [[NSBundle mainBundle] URLForResource:@"dollarwinner" withExtension:@"mp3"];
+        self.loserURL = [[NSBundle mainBundle] URLForResource:@"loser1" withExtension:@"mp3"];
+        self.winnerURL = [[NSBundle mainBundle] URLForResource:@"winner" withExtension:@"mp3"];
+    
+}
+
+
+
 -(void)startNewGame {
+    
+    NSLog(@"GETTING TO START NEW GAME");
     
     self.player = [[RPTPlayer alloc] init];
     self.game = [[RPTGame alloc] init];
-    self.previousPickerRowValue = 5000;
-    [self.pirWheelPicker selectRow:5000 inComponent:0 animated:YES];
+    self.previousPickerRowValue = 3000;
+    [self.pirWheelPicker selectRow:3000 inComponent:0 animated:YES];
     [self startTieGame];
     
 }
@@ -91,6 +149,14 @@
 
 -(void)loadSettings {
     
+//    self.host = [[RPTHost alloc] init];
+    
+    NSLog(@"GETTING TO LOAD GAME");
+    
+    [self.pirWheelPicker selectRow:3000 inComponent:0 animated:YES];
+    
+    [self.hostImageView setImage:self.host.hostImage];
+    
     
     self.numbersArray = [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"wheel1"], [UIImage imageNamed:@"wheel2"],[UIImage imageNamed:@"wheel3"],[UIImage imageNamed:@"wheel4"],[UIImage imageNamed:@"wheel5"],[UIImage imageNamed:@"wheel6"],[UIImage imageNamed:@"wheel7"],[UIImage imageNamed:@"wheel8"],[UIImage imageNamed:@"wheel9"],[UIImage imageNamed:@"wheel10"],[UIImage imageNamed:@"wheel11"],[UIImage imageNamed:@"wheel12"],[UIImage imageNamed:@"wheel13"],[UIImage imageNamed:@"wheel14"],[UIImage imageNamed:@"wheel15"],[UIImage imageNamed:@"wheel16"],[UIImage imageNamed:@"wheel17"], [UIImage imageNamed:@"wheel18"], [UIImage imageNamed:@"wheel19"], [UIImage imageNamed:@"wheel20"], nil];
     
@@ -105,6 +171,7 @@
     self.pickerGestureDown.numberOfTouchesRequired = 1;
     [self.pirWheelPicker addGestureRecognizer:self.pickerGestureDown];
     [self.pirWheelPicker addGestureRecognizer:self.pickerGestureUp];
+    [self hideAllButtons];
     
 }
 
@@ -358,7 +425,9 @@
             
             if (self.player.totalSpinScore == 100) {
                 
-                [self.stayButtonOutlet setHidden:NO];
+                [self.doneButtonOutlet setHidden:NO];
+                
+                [self dollarWinnerSound];
             }
             
             else {
@@ -374,7 +443,9 @@
             
             if (self.player.totalSpinScore == 100) {
                 
-                [self.stayButtonOutlet setHidden:NO];
+                [self dollarWinnerSound];
+                
+                [self.doneButtonOutlet setHidden:NO];
             }
             
             else if (self.player.totalSpinScore >= self.game.highScore) {
@@ -397,7 +468,9 @@
             
             if (self.player.totalSpinScore == 100) {
                 
-                [self.stayButtonOutlet setHidden:NO];
+                [self dollarWinnerSound];
+                
+                [self.doneButtonOutlet setHidden:NO];
             }
             
             else if (self.player.totalSpinScore == self.game.highScore) {
@@ -425,12 +498,16 @@
         
         if (self.player.totalSpinScore == 100) {
             
-            [self.stayButtonOutlet setHidden:NO];
+            [self.doneButtonOutlet setHidden:NO];
+            
+            [self dollarWinnerSound];
         }
         
         else if (self.player.totalSpinScore == 0) {
             
             [self.okButtonOutlet setHidden:NO];
+            
+            [self overSound];
         }
         
         else {
@@ -454,6 +531,7 @@
     [self.dismissOKSpinHarderButtonOutlet setHidden:YES];
     [self.dismissNextContestantImageButtonOutlet setHidden:YES];
     [self.dismissTieButtonOutlet setHidden:YES];
+    [self.introDismissButtonOutlet setHidden:YES];
     
     
 }
@@ -473,6 +551,8 @@
 
 - (IBAction)resetButtonAction:(id)sender {
     
+    [self.audioPlayer stop];
+    [self.audioPlayerWinner stop];
     [self startNewGame];
     
 }
@@ -480,6 +560,7 @@
 
 - (IBAction)playAgainButtonAction:(id)sender {
     
+    [self.audioPlayerWinner stop];
     [self startNewGame];
 
 }
@@ -490,6 +571,7 @@
     [self stayDoneAndOkayButtonMethod];
     [self.stayButtonOutlet setHidden:YES];
     [self.spinAgainButtonOutlet setHidden:YES];
+    
     
 }
 
@@ -507,6 +589,8 @@
     
     [self stayDoneAndOkayButtonMethod];
     [self.doneButtonOutlet setHidden:YES];
+    [self.audioPlayer stop];
+    
     
 }
 
@@ -515,6 +599,8 @@
     
     [self stayDoneAndOkayButtonMethod];
     [self.okButtonOutlet setHidden:YES];
+    [self.audioPlayer stop];
+    
     
 }
 
@@ -551,10 +637,12 @@
         
         else {
             
+            
             [self.game determiningTheWinner];
             [self.playAgainButtonOutlet setHidden:NO];
             [self.middleGraphic setImage:self.game.winnerGraphic];
             [self.middleGraphic setHidden:NO];
+            [self winnerSound];
             
         }
     }
@@ -601,5 +689,150 @@
     [self updateDigitalSign];
     
 }
+
+
+- (IBAction)priceIsWrongGesture:(UITapGestureRecognizer *)sender {
+    
+    if ([self.host.name isEqualToString:@"Bob"]) {
+        
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:self.priceIsWrong error:nil];
+        [self.audioPlayer play];
+        
+    }
+    
+     NSLog(@"PLAY MUSIC");
+
+}
+
+#pragma Audio Methods
+
+
+-(void)dollarWinnerSound {
+    
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:self.dollarWinner error:nil];
+    [self.audioPlayer play];
+    
+}
+
+-(void)overSound {
+    
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:self.loserURL error:nil];
+    [self.audioPlayer play];
+    
+}
+
+
+-(void)winnerSound {
+    
+    self.audioPlayerWinner = [[AVAudioPlayer alloc] initWithContentsOfURL:self.winnerURL error:nil];
+    [self.audioPlayerWinner play];
+    
+}
+
+- (IBAction)bobHeadAction:(id)sender {
+    
+    self.host.name = @"Bob";
+    self.host.hostImage = [UIImage imageNamed:@"bobImage"];
+    [self.hostImageView setImage:self.host.hostImage];
+    [self.bobHeadOutlet setHidden:YES];
+    [self.drewHeadOutlet setHidden:NO];
+    
+    
+}
+
+- (IBAction)drewHeadAction:(id)sender {
+    
+    self.host.name = @"Drew";
+    self.host.hostImage = [UIImage imageNamed:@"drewImage"];
+    [self.hostImageView setImage:self.host.hostImage];
+    [self.bobHeadOutlet setHidden:NO];
+    [self.drewHeadOutlet setHidden:YES];
+    
+    
+    
+    
+}
+
+-(void)checkHostButton {
+    
+    if ([self.host.name isEqualToString:@"Bob"]) {
+        [self.bobHeadOutlet setHidden:YES];
+        [self.drewHeadOutlet setHidden:NO];
+    }
+    if ([self.host.name isEqualToString:@"Drew"]) {
+        [self.bobHeadOutlet setHidden:NO];
+        [self.drewHeadOutlet setHidden:YES];
+    }
+    
+    
+    
+}
+
+-(void)hostDialogIntro {
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.hostDialog = [UIImage imageNamed:@"gameIntro1"];
+            [self.hostDialogImageView setImage:self.hostDialog];
+            
+        } completion:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.hostDialog = [UIImage imageNamed:@"gameIntro2"];
+            [self.hostDialogImageView setImage:self.hostDialog];
+            
+        } completion:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 7.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.hostDialog = [UIImage imageNamed:@"gameIntro3"];
+            [self.hostDialogImageView setImage:self.hostDialog];
+            
+        } completion:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.hostDialog = [UIImage imageNamed:@"gameIntro4"];
+            [self.hostDialogImageView setImage:self.hostDialog];
+            
+            
+        } completion:^(BOOL finished) {
+            
+            if (finished) {
+                [self.introDismissButtonOutlet setHidden:NO];
+            }
+        }];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 13.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.hostDialog = [UIImage imageNamed:@"gameIntro5"];
+            [self.hostDialogImageView setImage:self.hostDialog];
+            
+        } completion:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 16.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.hostDialog = [UIImage imageNamed:@"gameIntro6"];
+            [self.hostDialogImageView setImage:self.hostDialog];
+            
+        } completion:nil];
+    });
+    
+}
+
+- (IBAction)introDismissButtonAction:(id)sender {
+    
+    [self.hostDialogImageView setHidden:YES];
+    [self.introDismissButtonOutlet setHidden:YES];
+    [self startNewGame];
+    
+}
+
 
 @end
