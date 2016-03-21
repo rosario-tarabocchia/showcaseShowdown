@@ -8,6 +8,7 @@
 
 #import "RPTViewController.h"
 #import "RPTGame.h"
+#import "RPTHost.h"
 #import <AVFoundation/AVFoundation.h>
 
 
@@ -16,10 +17,6 @@
 //Game Properties
 @property (nonatomic) RPTPlayer *player;
 @property (nonatomic) RPTGame *game;
-
-@property (weak, nonatomic) IBOutlet UILabel *p1Score;
-@property (weak, nonatomic) IBOutlet UILabel *p2Score;
-@property (weak, nonatomic) IBOutlet UILabel *p3Score;
 
 //PickerView Properties
 @property (weak, nonatomic) IBOutlet UIPickerView *pirWheelPicker;
@@ -33,16 +30,16 @@
 @property (nonatomic) BOOL fullSpin;
 @property (nonatomic) BOOL spinDownward;
 @property (nonatomic) BOOL spinUpwards;
-
+@property (nonatomic) BOOL anotherTieGame;
 
 //Images Properties
 @property (weak, nonatomic) IBOutlet UIImageView *digitalSignImage;
 @property (weak, nonatomic) IBOutlet UIImageView *middleGraphic;
 @property (weak, nonatomic) IBOutlet UIImageView *nextContestantImageView;
-@property (nonatomic) UIImage *nextContestantImage;
 @property (strong, nonatomic) IBOutlet UIImageView *hostDialogImageView;
+@property (nonatomic) UIImage *nextContestantImage;
 @property (nonatomic ,strong) UIImage *hostDialog;
-//@property (strong, nonatomic) IBOutlet UIImageView *hostImageView;
+@property (strong, nonatomic) IBOutlet UILabel *hostDialogLabel;
 
 //Buttons Properties
 @property (weak, nonatomic) IBOutlet UIButton *stayButtonOutlet;
@@ -57,14 +54,21 @@
 @property (strong, nonatomic) IBOutlet UIButton *drewHeadOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *bobHeadOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *introDismissButtonOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *dismissStayButtonDialogOutlet;
 
 //Audio
 @property (nonatomic) AVAudioPlayer *audioPlayer;
 @property (nonatomic) AVAudioPlayer *audioPlayerWinner;
+@property (nonatomic) AVAudioPlayer *buttonPlayer;
 @property (nonatomic) NSURL *priceIsWrong;
 @property (nonatomic) NSURL *dollarWinner;
 @property (nonatomic) NSURL *loserURL;
 @property (nonatomic) NSURL *winnerURL;
+@property (nonatomic) NSURL *buttonURL;
+
+//Timer
+@property (nonatomic) NSTimer *timer;
+@property (nonatomic, assign) NSInteger seconds;
 
 
 
@@ -74,36 +78,24 @@
 
 - (void)viewDidLoad {
     
-    NSLog(@"%@", self.host.name);
-    
     [super viewDidLoad];
     
+    UIImage *centsSign = [UIImage imageNamed:@"spin"];
+    
+    [self.digitalSignImage setImage:centsSign];
+    [self.pirWheelPicker setUserInteractionEnabled:NO];
     [self loadSettings];
     [self loadAudio];
     [self checkHostButton];
-    UIImage *centsSign = [UIImage imageNamed:@"spin"];
-    [self.digitalSignImage setImage:centsSign];
-//    [self startNewGame];
-    
-    
-    NSLog(@"GETTING HERE");
-    
-    
-    
-    
-    
-    
-
-    
-    
     
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    
     [super viewDidAppear:animated];
-
     [self hostDialogIntro];
 }
+
 
 -(void)loadAudio {
     
@@ -111,50 +103,38 @@
         self.dollarWinner = [[NSBundle mainBundle] URLForResource:@"dollarwinner" withExtension:@"mp3"];
         self.loserURL = [[NSBundle mainBundle] URLForResource:@"loser1" withExtension:@"mp3"];
         self.winnerURL = [[NSBundle mainBundle] URLForResource:@"winner" withExtension:@"mp3"];
+        self.buttonURL = [[NSBundle mainBundle] URLForResource:@"buttonSound" withExtension:@"mp3"];
     
 }
 
 
-
 -(void)startNewGame {
-    
-    NSLog(@"GETTING TO START NEW GAME");
     
     self.player = [[RPTPlayer alloc] init];
     self.game = [[RPTGame alloc] init];
-    self.previousPickerRowValue = 3000;
-    [self.pirWheelPicker selectRow:3000 inComponent:0 animated:YES];
+    self.previousPickerRowValue = 8000;
+    [self.pirWheelPicker selectRow:8000 inComponent:0 animated:YES];
     [self startTieGame];
+    self.anotherTieGame = NO;
     
 }
 
 -(void)startTieGame {
     
     [self.pirWheelPicker setUserInteractionEnabled:NO];
-    
     [self upDatePlayer];
     [self updateDigitalSign];
     [self hideAllButtons];
     [self hideGraphics];
     [self getContestantImage];
-    
-    
-    
-    self.p1Score.text = 0;
-    self.p2Score.text = 0;
-    self.p3Score.text = 0;
-    
-    
+
 }
 
 -(void)loadSettings {
     
-//    self.host = [[RPTHost alloc] init];
+
     
-    NSLog(@"GETTING TO LOAD GAME");
-    
-    [self.pirWheelPicker selectRow:3000 inComponent:0 animated:YES];
-    
+    [self.pirWheelPicker selectRow:8000 inComponent:0 animated:YES];
     [self.hostImageView setImage:self.host.hostImage];
     
     
@@ -171,6 +151,8 @@
     self.pickerGestureDown.numberOfTouchesRequired = 1;
     [self.pirWheelPicker addGestureRecognizer:self.pickerGestureDown];
     [self.pirWheelPicker addGestureRecognizer:self.pickerGestureUp];
+    
+
     [self hideAllButtons];
     
 }
@@ -307,6 +289,7 @@
         
         [self.player numberCheck:self.player.wheelNumber];
         [self updateDigitalSign];
+        [self updateHostDialog];
         [self showButtons];
         
     }
@@ -314,24 +297,8 @@
     else {
         
         self.previousPickerRowValue = self.pickerRowValue;
-        
         [self.dismissOKSpinHarderButtonOutlet setHidden:NO];
-        
-        if (self.spinUpwards) {
-            
-            UIImage *spinHarderImage = [UIImage imageNamed:@"swipeDownImage"];
-            [self.middleGraphic setImage:spinHarderImage];
-            [self.middleGraphic setHidden:NO];
-            
-        }
-        
-        else {
-            
-            UIImage *spinHarderImage = [UIImage imageNamed:@"spinHarderImage"];
-            [self.middleGraphic setImage:spinHarderImage];
-            [self.middleGraphic setHidden:NO];
-            
-        }
+        [self notAValidSpin];
         
     }
     
@@ -350,9 +317,7 @@
     if (finalValue > 19 && self.spinDownward) {
         
         self.player.numberOfSpins += 1;
-        
         fullSpin = YES;
-        
         [self.pirWheelPicker setUserInteractionEnabled:NO];
         
         if (self.player.numberOfSpins >= 2) {
@@ -366,7 +331,6 @@
     else {
         
         fullSpin = NO;
-        
         [self.pirWheelPicker setUserInteractionEnabled:NO];
         
     }
@@ -386,14 +350,12 @@
 
 }
 
-
 - (IBAction)swipeDown:(id)sender {
     
     self.spinDownward = YES;
     self.spinUpwards = NO;
     
 }
-
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
@@ -425,16 +387,13 @@
             
             if (self.player.totalSpinScore == 100) {
                 
-                [self.doneButtonOutlet setHidden:NO];
-                
-                [self dollarWinnerSound];
+                [self doTheDollarStuff];
             }
             
             else {
             
             [self.spinAgainButtonOutlet setHidden:NO];
-            
-                [self.stayButtonOutlet setHidden:NO];
+            [self.stayButtonOutlet setHidden:NO];
             
             }
         }
@@ -443,15 +402,12 @@
             
             if (self.player.totalSpinScore == 100) {
                 
-                [self dollarWinnerSound];
-                
-                [self.doneButtonOutlet setHidden:NO];
+                [self doTheDollarStuff];
             }
             
             else if (self.player.totalSpinScore >= self.game.highScore) {
                 
                 [self.stayButtonOutlet setHidden:NO];
-                
                 [self.spinAgainButtonOutlet setHidden:NO];
             
             }
@@ -468,9 +424,7 @@
             
             if (self.player.totalSpinScore == 100) {
                 
-                [self dollarWinnerSound];
-                
-                [self.doneButtonOutlet setHidden:NO];
+                [self doTheDollarStuff];
             }
             
             else if (self.player.totalSpinScore == self.game.highScore) {
@@ -498,15 +452,12 @@
         
         if (self.player.totalSpinScore == 100) {
             
-            [self.doneButtonOutlet setHidden:NO];
-            
-            [self dollarWinnerSound];
+            [self doTheDollarStuff];
         }
         
         else if (self.player.totalSpinScore == 0) {
             
             [self.okButtonOutlet setHidden:NO];
-            
             [self overSound];
         }
         
@@ -532,6 +483,7 @@
     [self.dismissNextContestantImageButtonOutlet setHidden:YES];
     [self.dismissTieButtonOutlet setHidden:YES];
     [self.introDismissButtonOutlet setHidden:YES];
+    [self.dismissStayButtonDialogOutlet setHidden:YES];
     
     
 }
@@ -541,6 +493,8 @@
     
     [self.middleGraphic setHidden:YES];
     [self.nextContestantImageView setHidden:YES];
+    [self.hostDialogImageView setHidden:YES];
+    [self.hostDialogLabel setHidden:YES];
     
 }
 
@@ -554,6 +508,7 @@
     [self.audioPlayer stop];
     [self.audioPlayerWinner stop];
     [self startNewGame];
+    [self buttonSound];
     
 }
 
@@ -562,17 +517,34 @@
     
     [self.audioPlayerWinner stop];
     [self startNewGame];
+    [self buttonSound];
 
 }
 
 
 - (IBAction)stayButtonAction:(id)sender {
     
-    [self stayDoneAndOkayButtonMethod];
     [self.stayButtonOutlet setHidden:YES];
     [self.spinAgainButtonOutlet setHidden:YES];
+    [self.hostDialogImageView setHidden:YES];
+    [self.hostDialogLabel setHidden:YES];
     
+    if (self.game.playerCount == 0 || self.game.playerCount == 1 ) {
+        
+        [self.dismissStayButtonDialogOutlet setHidden:NO];
+        self.host.hostDialog = [UIImage imageNamed:@"scoreHoldUp"];
+        [self.hostDialogImageView setImage:self.host.hostDialog];
+        [self.hostDialogImageView setHidden:NO];
+    }
     
+    if (self.game.playerCount == 2) {
+    
+    [self stayDoneAndOkayButtonMethod];
+    [self.hostDialogImageView setHidden:NO];
+        
+    }
+
+    [self buttonSound];
 }
 
 
@@ -581,7 +553,11 @@
     [self.pirWheelPicker setUserInteractionEnabled:YES];
     [self.spinAgainButtonOutlet setHidden:YES];
     [self.stayButtonOutlet setHidden:YES];
+    [self.hostDialogImageView setHidden:YES];
+    [self.hostDialogLabel setHidden:YES];
+    [self buttonSound];
     
+
 }
 
 
@@ -590,6 +566,8 @@
     [self stayDoneAndOkayButtonMethod];
     [self.doneButtonOutlet setHidden:YES];
     [self.audioPlayer stop];
+    [self buttonSound];
+
     
     
 }
@@ -600,6 +578,8 @@
     [self stayDoneAndOkayButtonMethod];
     [self.okButtonOutlet setHidden:YES];
     [self.audioPlayer stop];
+    [self buttonSound];
+
     
     
 }
@@ -610,15 +590,14 @@
     [self.middleGraphic setHidden:YES];
     [self.pirWheelPicker setUserInteractionEnabled:YES];
     [self.dismissOKSpinHarderButtonOutlet setHidden:YES];
+    [self.hostDialogImageView setHidden:YES];
+    [self buttonSound];
     
 }
 
 
 -(void)stayDoneAndOkayButtonMethod {
     
-    self.p1Score.text = [NSString stringWithFormat:@"%li", self.game.player1.totalSpinScore];
-    self.p2Score.text = [NSString stringWithFormat:@"%li", self.game.player2.totalSpinScore];
-    self.p3Score.text = [NSString stringWithFormat:@"%li", self.game.player3.totalSpinScore];
     
     self.game.playerCount += 1;
     
@@ -628,8 +607,15 @@
         
         if (self.game.tieGame) {
             
+            self.anotherTieGame = YES;
+            
             UIImage *tieGame = [UIImage imageNamed:@"tieGame"];
             [self.dismissTieButtonOutlet setHidden:NO];
+            self.hostDialogLabel.text = @"It's a TIE!!! SPIN-OFF!!!";
+            self.host.hostDialog = [UIImage imageNamed:@"blankDialog"];
+            [self.hostDialogImageView setImage:self.host.hostDialog];
+            [self.hostDialogImageView setHidden:NO];
+            [self.hostDialogLabel setHidden:NO];
             [self.middleGraphic setImage:tieGame];
             [self.middleGraphic setHidden:NO];
         
@@ -640,6 +626,11 @@
             
             [self.game determiningTheWinner];
             [self.playAgainButtonOutlet setHidden:NO];
+            self.hostDialogLabel.text = @"Congrats!!! You are going to the Showcase!!!";
+            self.host.hostDialog = [UIImage imageNamed:@"blankDialog"];
+            [self.hostDialogImageView setImage:self.host.hostDialog];
+            [self.hostDialogImageView setHidden:NO];
+            [self.hostDialogLabel setHidden:NO];
             [self.middleGraphic setImage:self.game.winnerGraphic];
             [self.middleGraphic setHidden:NO];
             [self winnerSound];
@@ -653,6 +644,10 @@
         [self upDatePlayer];
         [self updateDigitalSign];
         [self getContestantImage];
+        [self.hostDialogImageView setHidden:YES];
+        [self.hostDialogLabel setHidden:YES];
+        [self.middleGraphic setHidden:YES];
+        
         
     }
     
@@ -664,6 +659,7 @@
     [self.nextContestantImageView setHidden:YES];
     [self.dismissNextContestantImageButtonOutlet setHidden:YES];
     [self.pirWheelPicker setUserInteractionEnabled:YES];
+    [self buttonSound];
     
 }
 
@@ -687,21 +683,214 @@
     [self.dismissTieButtonOutlet setHidden:YES];
     self.game.tieGame = NO;
     [self updateDigitalSign];
+    [self buttonSound];
+    
+}
+
+- (IBAction)bobHeadAction:(id)sender {
+    
+    self.host.name = @"Bob";
+    self.host.hostImage = [UIImage imageNamed:@"bobImage"];
+    [self.hostImageView setImage:self.host.hostImage];
+    [self.bobHeadOutlet setHidden:YES];
+    [self.drewHeadOutlet setHidden:NO];
+    [self buttonSound];
+    
+    
+}
+
+- (IBAction)drewHeadAction:(id)sender {
+    
+    self.host.name = @"Drew";
+    self.host.hostImage = [UIImage imageNamed:@"drewImage"];
+    [self.hostImageView setImage:self.host.hostImage];
+    [self.bobHeadOutlet setHidden:NO];
+    [self.drewHeadOutlet setHidden:YES];
+    [self buttonSound];
+    
+    
+    
+    
+}
+
+-(void)checkHostButton {
+    
+    if ([self.host.name isEqualToString:@"Bob"]) {
+        [self.bobHeadOutlet setHidden:YES];
+        [self.drewHeadOutlet setHidden:NO];
+    }
+    
+    if ([self.host.name isEqualToString:@"Drew"]) {
+        [self.bobHeadOutlet setHidden:NO];
+        [self.drewHeadOutlet setHidden:YES];
+    }
+    
+}
+
+- (IBAction)introDismissButtonAction:(id)sender {
+    
+
+    [self.hostDialogImageView setHidden:YES];
+    [self.introDismissButtonOutlet setHidden:YES];
+    [self startNewGame];
+    [self buttonSound];
     
 }
 
 
-- (IBAction)priceIsWrongGesture:(UITapGestureRecognizer *)sender {
+- (IBAction)dismissStayDialogAction:(id)sender {
     
-    if ([self.host.name isEqualToString:@"Bob"]) {
+    [self.dismissStayButtonDialogOutlet setHidden:YES];
+    [self.hostDialogImageView setHidden:YES];
+    [self stayDoneAndOkayButtonMethod];
+    [self buttonSound];
+    
+}
+
+-(void)updateHostDialog {
+    
+    NSString *dialog = [self.host getHostDialogWithPlayer:self.game.playerCount withSpin:self.player.numberOfSpins withHighScore:self.game.highScore withPlayerScore:self.player.totalSpinScore withTieBool:self.anotherTieGame andNumberOfPlayers:self.game.playerArray.count];
+    
+    self.hostDialogLabel.text = dialog;
+    self.host.hostDialog = [UIImage imageNamed:@"blankDialog"];
+    [self.hostDialogImageView setImage:self.host.hostDialog];
+    [self.hostDialogImageView setHidden:NO];
+    [self.hostDialogLabel setHidden:NO];
+    
+    
+}
+
+#pragma animations
+
+-(void)hostDialogIntro {
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .6 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.host.hostDialog = [UIImage imageNamed:@"gameIntro1"];
+            [self.hostDialogImageView setImage:self.host.hostDialog];
+            
+        } completion:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.host.hostDialog = [UIImage imageNamed:@"gameIntro2"];
+            [self.hostDialogImageView setImage:self.host.hostDialog];
+            
+        } completion:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 7.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.host.hostDialog = [UIImage imageNamed:@"gameIntro3"];
+            [self.hostDialogImageView setImage:self.host.hostDialog];
+            
+        } completion:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.host.hostDialog = [UIImage imageNamed:@"gameIntro4"];
+            [self.hostDialogImageView setImage:self.host.hostDialog];
+            
+            
+        } completion:^(BOOL finished) {
+            
+            if (finished) {
+                
+                [self.introDismissButtonOutlet setHidden:NO];
+            }
+        }];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 13.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.host.hostDialog = [UIImage imageNamed:@"gameIntro5"];
+            [self.hostDialogImageView setImage:self.host.hostDialog];
+            
+        } completion:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 16.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
+            self.host.hostDialog = [UIImage imageNamed:@"gameIntro6"];
+            [self.hostDialogImageView setImage:self.host.hostDialog];
+            
+        } completion:nil];
+    });
+    
+}
+
+
+-(void)animateDollar {
+    
+    if (self.seconds == 0) {
         
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:self.priceIsWrong error:nil];
-        [self.audioPlayer play];
-        
+        NSLog(@"This is getting called");
+        [self.doneButtonOutlet setHidden:NO];
+        [self.timer invalidate];
+        self.timer = nil;
     }
     
-     NSLog(@"PLAY MUSIC");
+    else {
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.middleGraphic duration:0 options:0 animations:^{
+            UIImage *spinHarderImage = [UIImage imageNamed:@"dollarGreen"];
+            [self.middleGraphic setImage:spinHarderImage];
+            [self.middleGraphic setHidden:NO];
+            
+            NSLog(@"1");
+            
+        } completion:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .25 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.middleGraphic duration:0 options:0 animations:^{
+            UIImage *spinHarderImage = [UIImage imageNamed:@"dollarOrange"];
+            [self.middleGraphic setImage:spinHarderImage];
+            [self.middleGraphic setHidden:NO];
+            
+            NSLog(@"2");
+            
+        } completion:nil];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.middleGraphic duration:0 options:0 animations:^{
+            UIImage *spinHarderImage = [UIImage imageNamed:@"dollarYellow"];
+            [self.middleGraphic setImage:spinHarderImage];
+            [self.middleGraphic setHidden:NO];
+            
+            NSLog(@"3");
+            
+        } completion:nil];
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .75 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.middleGraphic duration:0 options:UIViewAnimationOptionTransitionNone animations:^{
+            UIImage *spinHarderImage = [UIImage imageNamed:@"dollarRed"];
+            [self.middleGraphic setImage:spinHarderImage];
+            [self.middleGraphic setHidden:NO];
+            
+            NSLog(@"4");
+            
+        } completion:nil];
+    });
+    
+    self.seconds -= 1;
+    
+    }
+    
+}
 
+-(void)startTimer {
+    
+    self.seconds = 11;
+    
+    [self.doneButtonOutlet setHidden:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(animateDollar) userInfo:nil repeats:YES];
+    [self.timer fire];
+    
 }
 
 #pragma Audio Methods
@@ -721,6 +910,13 @@
     
 }
 
+-(void)buttonSound {
+   
+    self.buttonPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:self.buttonURL error:nil];
+    [self.buttonPlayer play];
+    
+}
+
 
 -(void)winnerSound {
     
@@ -729,110 +925,38 @@
     
 }
 
-- (IBAction)bobHeadAction:(id)sender {
+-(void)doTheDollarStuff {
     
-    self.host.name = @"Bob";
-    self.host.hostImage = [UIImage imageNamed:@"bobImage"];
-    [self.hostImageView setImage:self.host.hostImage];
-    [self.bobHeadOutlet setHidden:YES];
-    [self.drewHeadOutlet setHidden:NO];
+    [self startTimer];
+    [self dollarWinnerSound];
+
     
     
 }
 
-- (IBAction)drewHeadAction:(id)sender {
+-(void)notAValidSpin{
     
-    self.host.name = @"Drew";
-    self.host.hostImage = [UIImage imageNamed:@"drewImage"];
-    [self.hostImageView setImage:self.host.hostImage];
-    [self.bobHeadOutlet setHidden:NO];
-    [self.drewHeadOutlet setHidden:YES];
+    UIImage *spinHarderImage;
     
-    
-    
-    
-}
-
--(void)checkHostButton {
-    
-    if ([self.host.name isEqualToString:@"Bob"]) {
-        [self.bobHeadOutlet setHidden:YES];
-        [self.drewHeadOutlet setHidden:NO];
+    if (self.spinUpwards) {
+        
+        spinHarderImage = [UIImage imageNamed:@"swipeDownImage"];
+        self.host.hostDialog = [UIImage imageNamed:@"spinDownDialog"];
     }
-    if ([self.host.name isEqualToString:@"Drew"]) {
-        [self.bobHeadOutlet setHidden:NO];
-        [self.drewHeadOutlet setHidden:YES];
+    
+    else {
+        
+        spinHarderImage = [UIImage imageNamed:@"spinHarderImage"];
+        self.host.hostDialog = [UIImage imageNamed:@"spinHarderDialog"];
+        
     }
     
     
+    [self.middleGraphic setHidden:NO];
+    [self.middleGraphic setImage:spinHarderImage];
+    [self.hostDialogImageView setImage:self.host.hostDialog];
+    [self.hostDialogImageView setHidden:NO];
     
 }
-
--(void)hostDialogIntro {
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
-            self.hostDialog = [UIImage imageNamed:@"gameIntro1"];
-            [self.hostDialogImageView setImage:self.hostDialog];
-            
-        } completion:nil];
-    });
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
-            self.hostDialog = [UIImage imageNamed:@"gameIntro2"];
-            [self.hostDialogImageView setImage:self.hostDialog];
-            
-        } completion:nil];
-    });
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 7.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
-            self.hostDialog = [UIImage imageNamed:@"gameIntro3"];
-            [self.hostDialogImageView setImage:self.hostDialog];
-            
-        } completion:nil];
-    });
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
-            self.hostDialog = [UIImage imageNamed:@"gameIntro4"];
-            [self.hostDialogImageView setImage:self.hostDialog];
-            
-            
-        } completion:^(BOOL finished) {
-            
-            if (finished) {
-                [self.introDismissButtonOutlet setHidden:NO];
-            }
-        }];
-    });
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 13.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
-            self.hostDialog = [UIImage imageNamed:@"gameIntro5"];
-            [self.hostDialogImageView setImage:self.hostDialog];
-            
-        } completion:nil];
-    });
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 16.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.hostDialogImageView duration:1 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
-            self.hostDialog = [UIImage imageNamed:@"gameIntro6"];
-            [self.hostDialogImageView setImage:self.hostDialog];
-            
-        } completion:nil];
-    });
-    
-}
-
-- (IBAction)introDismissButtonAction:(id)sender {
-    
-    [self.hostDialogImageView setHidden:YES];
-    [self.introDismissButtonOutlet setHidden:YES];
-    [self startNewGame];
-    
-}
-
 
 @end

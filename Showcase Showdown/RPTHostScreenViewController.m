@@ -157,8 +157,8 @@
     });
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 15 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.bobDialogImage duration:2.0 options:0 animations:^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 16 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.bobDialogImage duration:2.0 options:UIViewAnimationOptionTransitionFlipFromTop animations:^{
             [self.drewDialogImage setHidden:YES];
             
             
@@ -178,56 +178,62 @@
 
 -(void)stageDoorsOpen:(void (^)(BOOL animationDone))completionHandler {
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.doorsClosed duration:.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.doorsClosed duration:.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             self.doorsOpened = [UIImage imageNamed:@"doorsOpen1"];
             [self.doorsClosed setImage:self.doorsOpened];
+            [self fadeVolumeDown:self.audioPlayerIntro];
             
             
         } completion:nil];
     });
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.doorsClosed duration:.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.doorsClosed duration:.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             self.doorsOpened = [UIImage imageNamed:@"doorsOpen2"];
             [self.doorsClosed setImage:self.doorsOpened];
+            [self fadeVolumeDown:self.audioPlayerIntro];
             
             
         } completion:nil];
     });
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.6 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.doorsClosed duration:.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.doorsClosed duration:.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             self.doorsOpened = [UIImage imageNamed:@"doorsOpen3"];
             [self.doorsClosed setImage:self.doorsOpened];
+            [self fadeVolumeDown:self.audioPlayerIntro];
             
             
         } completion:nil];
     });
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.doorsClosed duration:.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.doorsClosed duration:.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             self.doorsOpened = [UIImage imageNamed:@"doorsOpen4"];
             [self.doorsClosed setImage:self.doorsOpened];
+            [self fadeVolumeDown:self.audioPlayerIntro];
             
             
         } completion:nil];
     });
     
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.6 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.doorsClosed duration:.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.doorsClosed duration:.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             self.doorsOpened = [UIImage imageNamed:@"doorsOpen5"];
             [self.doorsClosed setImage:self.doorsOpened];
+            [self fadeVolumeDown:self.audioPlayerIntro];
             
             
         } completion:nil];
     });
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:self.doorsClosed duration:.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:self.doorsClosed duration:.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             self.doorsOpened = [UIImage imageNamed:@"doorsOpen6"];
             [self.doorsClosed setImage:self.doorsOpened];
+            [self fadeVolumeDown:self.audioPlayerIntro];
             
             
         } completion:^(BOOL finished) {
@@ -261,6 +267,10 @@
             
             self.host.name = @"Drew";
             self.host.hostImage = [UIImage imageNamed:@"drewImage"];
+            [self.drewButton setEnabled:NO];
+            [self.bobButton setEnabled:NO];
+            
+            [self fadeVolumeDown:self.audioPlayerIntro];
             
             [self performSegueWithIdentifier:@"gameVC" sender:nil];
         }
@@ -270,6 +280,8 @@
 
 - (IBAction)bobButtonAction:(id)sender {
     
+
+    
     [self stageDoorsOpen:^(BOOL animationDone) {
         if (animationDone) {
             
@@ -278,9 +290,35 @@
             self.host.name = @"Bob";
             self.host.hostImage = [UIImage imageNamed:@"bobImage"];
             
+            [self.drewButton setEnabled:NO];
+            [self.bobButton setEnabled:NO];
+            
+            
+            
             [self performSegueWithIdentifier:@"gameVC" sender:nil];
         }
     }];
+}
+
+
+- (void)fadeVolumeDown:(AVAudioPlayer *)introPlayer
+{
+    
+    NSLog(@"%f", introPlayer.volume);
+    introPlayer.volume = introPlayer.volume - .175;
+    
+    
+    
+    if (introPlayer.volume < 0.1) {
+    
+        [introPlayer stop];
+    
+    } else {
+    
+        [self performSelector:@selector(fadeVolumeDown:) withObject:nil afterDelay:0.1];
+        
+        NSLog(@"%f", introPlayer.volume);
+    }
 }
 
 

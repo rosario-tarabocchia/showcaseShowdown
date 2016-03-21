@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		730EA2491CA08641007FD957 /* buttonSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 730EA2481CA08641007FD957 /* buttonSound.mp3 */; };
 		7342DA0B1C9A3218003E1B4E /* RPTHostScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7342DA0A1C9A3218003E1B4E /* RPTHostScreenViewController.m */; };
 		7342DA0E1C9A3F43003E1B4E /* RPTHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 7342DA0D1C9A3F43003E1B4E /* RPTHost.m */; };
 		7342DA101C9A471A003E1B4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7342DA0F1C9A471A003E1B4E /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		730EA2481CA08641007FD957 /* buttonSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = buttonSound.mp3; sourceTree = "<group>"; };
 		7342DA091C9A3218003E1B4E /* RPTHostScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTHostScreenViewController.h; sourceTree = "<group>"; };
 		7342DA0A1C9A3218003E1B4E /* RPTHostScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPTHostScreenViewController.m; sourceTree = "<group>"; };
 		7342DA0C1C9A3F43003E1B4E /* RPTHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPTHost.h; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				7342DA0D1C9A3F43003E1B4E /* RPTHost.m */,
 				7342DA111C9B185A003E1B4E /* happy10.wav */,
 				7342DA1B1C9B38FB003E1B4E /* CMONDWN75.mp3 */,
+				730EA2481CA08641007FD957 /* buttonSound.mp3 */,
 				7342DA131C9B1D4D003E1B4E /* dollarwinner.mp3 */,
 				7342DA151C9B1F18003E1B4E /* loser1.mp3 */,
 				7342DA191C9B25CB003E1B4E /* winner.mp3 */,
@@ -197,6 +200,7 @@
 				7342DA121C9B185A003E1B4E /* happy10.wav in Resources */,
 				7342DA1C1C9B38FB003E1B4E /* CMONDWN75.mp3 in Resources */,
 				7342DA141C9B1D4D003E1B4E /* dollarwinner.mp3 in Resources */,
+				730EA2491CA08641007FD957 /* buttonSound.mp3 in Resources */,
 				73AABDDB1C97030D0091B443 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

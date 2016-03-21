@@ -13,5 +13,13 @@
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) UIImage *hostImage;
+@property (nonatomic, strong) UIImage *hostDialog;
+@property (nonatomic, strong) NSString *hostDialogString;
+-(NSString *)getHostDialogWithPlayer:(NSInteger)playerCount
+                           withSpin:(NSInteger)spinCount
+                    withHighScore:(NSInteger)highScore
+                    withPlayerScore:(NSInteger)playerScore
+                         withTieBool:(BOOL)tie
+                  andNumberOfPlayers:(NSInteger)numberOfPlayers;
 
 @end

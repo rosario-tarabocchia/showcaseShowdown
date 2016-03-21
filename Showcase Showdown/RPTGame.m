@@ -128,6 +128,7 @@
     self.tieGame = YES;
     self.playerCount = 0;
     self.winnerGraphic = [UIImage imageNamed:@"tiedImage"];
+    self.highScore = 0;
 
 }
 

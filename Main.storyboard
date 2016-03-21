@@ -37,42 +37,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QxH-tn-hF5">
                                 <rect key="frame" x="408" y="185" width="58" height="60"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td2-9B-LNg">
-                                <rect key="frame" x="20" y="266" width="18" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bk-yP-R7t">
-                                <rect key="frame" x="20" y="285" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjr-Ik-N92">
-                                <rect key="frame" x="20" y="144" width="21" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LII-FT-LA0">
-                                <rect key="frame" x="20" y="167" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJY-y7-FP8">
-                                <rect key="frame" x="20" y="198" width="21" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0oy-jM-68x">
-                                <rect key="frame" x="20" y="222" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6C3-No-UcY">
                                 <rect key="frame" x="636" y="314" width="80" height="80"/>
                                 <state key="normal" title="STAY" image="stayButton"/>
@@ -132,9 +96,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bobImage" translatesAutoresizingMaskIntoConstraints="NO" id="3ca-T8-wlH">
                                 <rect key="frame" x="76" y="90" width="202" height="304"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="BUt-p3-AsU" appends="YES" id="Qmr-ug-jhg"/>
-                                </connections>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gr7-7n-YmA">
                                 <rect key="frame" x="584" y="109" width="118" height="63"/>
@@ -176,6 +137,19 @@
                                     <action selector="introDismissButtonAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="q6x-6b-pJV"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHr-AE-SfF">
+                                <rect key="frame" x="636" y="314" width="80" height="80"/>
+                                <state key="normal" title="Button" image="doneButton"/>
+                                <connections>
+                                    <action selector="dismissStayDialogAction:" destination="GbU-z1-2FX" eventType="touchUpInside" id="SDF-X9-Usa"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X20-nD-g5u">
+                                <rect key="frame" x="286" y="75" width="195" height="49"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -186,18 +160,17 @@
                         <outlet property="digitalSignImage" destination="gr7-7n-YmA" id="QxR-jT-p5I"/>
                         <outlet property="dismissNextContestantImageButtonOutlet" destination="pa5-7n-K3l" id="S1R-0r-8tL"/>
                         <outlet property="dismissOKSpinHarderButtonOutlet" destination="NIu-dB-pOo" id="x6k-m0-fwO"/>
+                        <outlet property="dismissStayButtonDialogOutlet" destination="zHr-AE-SfF" id="tuX-J2-Fre"/>
                         <outlet property="dismissTieButtonOutlet" destination="45K-8b-OlA" id="M3k-Ko-ztI"/>
                         <outlet property="doneButtonOutlet" destination="fS5-dl-t7D" id="Jwg-3W-6tJ"/>
                         <outlet property="drewHeadOutlet" destination="YD4-h2-vDj" id="tSW-Ou-2KC"/>
                         <outlet property="hostDialogImageView" destination="2qc-tM-rMZ" id="mdT-ur-JaK"/>
+                        <outlet property="hostDialogLabel" destination="X20-nD-g5u" id="lGW-UU-iSs"/>
                         <outlet property="hostImageView" destination="3ca-T8-wlH" id="stX-AZ-F0T"/>
                         <outlet property="introDismissButtonOutlet" destination="Dx0-fB-rOV" id="yuU-b7-mdN"/>
                         <outlet property="middleGraphic" destination="1Sf-hk-viD" id="yO9-9w-zuT"/>
                         <outlet property="nextContestantImageView" destination="6aS-yf-Jtt" id="bbp-rE-T7m"/>
                         <outlet property="okButtonOutlet" destination="bJy-sC-8Bk" id="Af1-wT-sZn"/>
-                        <outlet property="p1Score" destination="7bk-yP-R7t" id="3L1-W6-eiq"/>
-                        <outlet property="p2Score" destination="LII-FT-LA0" id="8ok-BL-dtB"/>
-                        <outlet property="p3Score" destination="0oy-jM-68x" id="fXR-ci-1mP"/>
                         <outlet property="pirWheelPicker" destination="2OV-Hg-4Tl" id="yNT-ST-ypU"/>
                         <outlet property="playAgainButtonOutlet" destination="FVr-JM-d4V" id="eE5-HR-vrz"/>
                         <outlet property="resetButtonOutlet" destination="nMy-Xn-ufh" id="LzN-bR-C6j"/>
@@ -206,11 +179,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHZ-fY-91B" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="BUt-p3-AsU">
-                    <connections>
-                        <action selector="priceIsWrongGesture:" destination="GbU-z1-2FX" id="Oaf-Uz-6Z8"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="313" y="362"/>
         </scene>
@@ -229,26 +197,29 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="doorsClosed" translatesAutoresizingMaskIntoConstraints="NO" id="MaP-lg-AYd">
                                 <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PH5-u0-7Ir">
-                                <rect key="frame" x="514" y="155" width="119" height="236"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PH5-u0-7Ir">
+                                <rect key="frame" x="514" y="151" width="119" height="236"/>
                                 <state key="normal" image="drewImage"/>
                                 <connections>
                                     <action selector="drewButtonAction:" destination="D6h-n7-P2s" eventType="touchUpInside" id="is5-AS-1qh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fZ-Vj-WQT">
-                                <rect key="frame" x="115" y="149" width="103" height="245"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fZ-Vj-WQT">
+                                <rect key="frame" x="115" y="145" width="103" height="245"/>
                                 <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
                                 <state key="normal" image="bobImage"/>
                                 <connections>
                                     <action selector="bobButtonAction:" destination="D6h-n7-P2s" eventType="touchUpInside" id="9b7-S0-yW7"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hostIntroScreen2" translatesAutoresizingMaskIntoConstraints="NO" id="2Sg-Ys-SJ5">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Sg-Ys-SJ5">
                                 <rect key="frame" x="221" y="125" width="290" height="104"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hostIntro5" translatesAutoresizingMaskIntoConstraints="NO" id="ONm-MV-xzd">
-                                <rect key="frame" x="246" y="286" width="240" height="86"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONm-MV-xzd">
+                                <rect key="frame" x="246" y="281" width="240" height="86"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="contestantsRow" translatesAutoresizingMaskIntoConstraints="NO" id="Gjg-Tk-DYR">
+                                <rect key="frame" x="157" y="363" width="409" height="52"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -260,7 +231,6 @@
                         <outlet property="bobDialogImage" destination="2Sg-Ys-SJ5" id="4xn-tB-iXJ"/>
                         <outlet property="doorsClosed" destination="MaP-lg-AYd" id="LDg-cC-b14"/>
                         <outlet property="drewButton" destination="PH5-u0-7Ir" id="4hd-vU-jpO"/>
-                        <outlet property="drewButtonOutlet" destination="PH5-u0-7Ir" id="JOK-Rn-tAe"/>
                         <outlet property="drewDialogImage" destination="ONm-MV-xzd" id="Tnl-3g-sEa"/>
                         <segue destination="GbU-z1-2FX" kind="show" identifier="gameVC" id="F3j-k9-Vr3"/>
                     </connections>
@@ -274,12 +244,11 @@
         <image name="backGround" width="2220" height="1245"/>
         <image name="bobHead" width="213" height="257"/>
         <image name="bobImage" width="303" height="705"/>
+        <image name="contestantsRow" width="2599" height="301"/>
         <image name="doneButton" width="1410" height="1528"/>
         <image name="doorsClosed" width="2185" height="1225"/>
         <image name="drewHead" width="222" height="211"/>
         <image name="drewImage" width="324" height="644"/>
-        <image name="hostIntro5" width="1546" height="419"/>
-        <image name="hostIntroScreen2" width="2051" height="799"/>
         <image name="okayButton" width="625" height="677"/>
         <image name="playAgainButton" width="1410" height="1528"/>
         <image name="resetButton" width="495" height="187"/>
